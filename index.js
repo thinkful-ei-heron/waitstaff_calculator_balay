@@ -2,11 +2,9 @@
 'use strict';
 
 const store = {
-  items: [
-    {id: cuid(), name: 'mealDetails', price: 0, tax: 0, tip: 0}, 
-    {id: cuid(), name: 'charges', subTotal: 0, tip: 0, total: 0}, 
-    {id: cuid(), name: 'earnings', tipTotal: 0, mealCount: 0, averageTip: 0}
-  ], 
+  mealDetails: {price: 0, tax: 0, tip: 0}, 
+  charges: {subTotal: 0, tip: 0, total: 0}, 
+  earnings: {tipTotal: 0, mealCount: 0, averageTip: 0}, 
   counter: 0, 
   totalTip: 0
 };
@@ -41,14 +39,14 @@ function generateContent(mealDetails, charges, earnings) {
 
 function render() {
   console.log('renderworking');
-  let mealDetails = store.items.find(item => item.name === 'mealDetails');
-  let charges = store.items.find(item => item.name === 'charges');
-  let earnings = store.items.find(item => item.name === 'earnings');
+  let mealDetails = store.mealDetails;
+  let charges = store.charges;
+  let earnings = store.earnings;
   generateContent(mealDetails, charges, earnings);
 }
 
 function updateNums(price, tax, tip) {
-  let item = store.items.find(item => item.name === 'mealDetails');
+  let item = store.mealDetails;
   item.price = item.price + parseFloat(price);
   item.tax = item.tax + parseFloat(tax) / 100;
   item.tip = item.tip + parseFloat(tip) / 100;
@@ -56,8 +54,8 @@ function updateNums(price, tax, tip) {
 
 function handleCustomerCharges() {
   console.log('chargesworking');
-  let details = store.items.find(item => item.name === 'mealDetails');
-  let item = store.items.find(item => item.name === 'charges');
+  let details = store.mealDetails;
+  let item = store.charges;
   item.subTotal = parseFloat((details.price + (details.tax * details.price)).toFixed(2));
   item.tip = parseFloat((item.subTotal * details.tip).toFixed(2));
   item.total = item.subTotal + item.tip;
@@ -67,15 +65,15 @@ function handleCustomerCharges() {
 
 function handleEarnings() {
   console.log('earningsworking');
-  let charges = store.items.find(item => item.name === 'charges');
-  let item = store.items.find(item => item.name === 'earnings');
+  let charges = store.charges;
+  let item = store.earnings;
   item.tipTotal = store.totalTip.toFixed(2);
   item.mealCount = store.counter;
   item.averageTip = parseFloat(item.tipTotal / item.mealCount).toFixed(2);
 }
 
 function clearMealDetails() {
-  let meal = store.items.find(item => item.name === 'mealDetails');
+  let meal = store.mealDetails;
   meal.price = 0;
   meal.tax = 0;
   meal.tip = 0;
@@ -107,11 +105,9 @@ function handleClear() {
 
 function resetCalculator() {
   $('.reset').on('click', '.resetButton', event => {
-    store.items = [
-      {id: cuid(), name: 'mealDetails', price: 0, tax: 0, tip: 0}, 
-      {id: cuid(), name: 'charges', subTotal: 0, tip: 0, total: 0}, 
-      {id: cuid(), name: 'earnings', tipTotal: 0, mealCount: 0, averageTip: 0}
-    ];
+    store.mealDetails = {price: 0, tax: 0, tip: 0};
+    store.charges = {subTotal: 0, tip: 0, total: 0};
+    store.earnings = {tipTotal: 0, mealCount: 0, averageTip: 0};
     store.counter = 0;
     store.totalTip = 0;
     console.log(store);
