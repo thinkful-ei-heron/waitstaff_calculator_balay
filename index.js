@@ -14,25 +14,25 @@ function generateContent(mealDetails, charges, earnings) {
   <form class='meal-details'>
     <h4>Enter the Meal Details</h4>
     <label for='price'>Base Meal Price: $</label>
-    <input type='number' class='priceInput js-priceInput' placeholder='Enter a number' step="0.01"><br>
-    <label for='tax'>Tax Rate: %</label>
-    <input type='number' class='taxInput js-taxInput' placeholder='Enter a percentage' step="0.01"><br>
+    <input type='number' class='priceInput js-priceInput' placeholder='ex. 20' step="0.01"><br><br>
+    <label for='tax' class="tax-label">Tax Rate: %</label>
+    <input type='number' class='taxInput js-taxInput' placeholder='ex. 3.5' step="0.01"><br><br>
     <label for='tip'>Tip Percentage: %</label>
-    <input type='number' class='tipInput js-tipInput' placeholder='ex. 20 for 20%' step="0.01"><br>
-    <button type="submit" class='submitMealDetails'>Submit</button>
-    <button type='button' class='resetMealDetails'>Cancel</button>
+    <input type='number' class='tipInput js-tipInput' placeholder='ex. 20' step="0.01"><br><br>
+    <div><button type="submit" class='submitMealDetails'>Submit</button>
+    <button type='button' class='resetMealDetails'>Cancel</button></div>
   </form>
   `);
   $('.js-charges').html(`
     <h4>Customer Charges</h4>
-    <span>Subtotal: ${charges.subTotal}</span> <br>
-    <span>Tip: ${charges.tip}</span> <br>
+    <span>Subtotal: ${charges.subTotal}</span> <br><br>
+    <span>Tip: ${charges.tip}</span> <br><br>
     <span>Total: ${charges.total}</span>
   `);
   $('.js-earnings').html(`
   <h4>My Earnings Info</h4>
-  <span>Tip Total: ${earnings.tipTotal}</span> <br>
-  <span>Meal Count: ${earnings.mealCount}</span> <br>
+  <span>Tip Total: ${earnings.tipTotal}</span> <br><br>
+  <span>Meal Count: ${earnings.mealCount}</span> <br><br>
   <span>Average Tip Per Meal: ${earnings.averageTip}</span>
   `);
 }
