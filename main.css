@@ -1,0 +1,23 @@
+header {
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+.meal-details {
+    width: 50%;
+    
+}
+
+.customer-charges-earnings {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+footer {
+    text-align: right;
+}
