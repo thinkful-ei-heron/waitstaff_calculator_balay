@@ -15,19 +15,16 @@ function updateNums(price, tax, tip) {
 }
 
 function handleCustomerCharges() {
-  console.log('chargesworking');
   let details = this.mealDetails;
   let item = this.charges;
   item.subTotal = parseFloat((details.price + (details.tax * details.price)).toFixed(2));
   item.tip = parseFloat((item.subTotal * details.tip).toFixed(2));
   item.total = item.subTotal + item.tip;
   this.totalTip = this.totalTip + item.tip;
-  console.log(this.totalTip);
 }
 
 function handleEarnings() {
   console.log('earningsworking');
-  //   let charges = this.charges;
   let item = this.earnings;
   item.tipTotal = this.totalTip.toFixed(2);
   item.mealCount = this.counter;
@@ -39,7 +36,6 @@ function clearMealDetails() {
   meal.price = 0;
   meal.tax = 0;
   meal.tip = 0;
-  console.log(meal);
 }
 
 function incrementCount() {

@@ -3,7 +3,8 @@
 import $ from 'jquery';
 import store from './store';
 
-function generateContent(mealDetails, charges, earnings) {
+
+function generateContent(charges, earnings) {
   $('.js-meal-details').html(`
   <form class='meal-details'>
     <h4>Enter the Meal Details</h4>
@@ -32,15 +33,12 @@ function generateContent(mealDetails, charges, earnings) {
 }
 
 function render() {
-  console.log('renderworking');
-  let mealDetails = store.mealDetails;
   let charges = store.charges;
   let earnings = store.earnings;
-  generateContent(mealDetails, charges, earnings);
+  generateContent(charges, earnings);
 }
 
 function handleMealDetails() {
-  console.log('mealdetailsworking');
   $('.js-meal-details').on('submit', '.meal-details', event => {
     event.preventDefault();
     let price = $('.js-priceInput').val();
@@ -52,7 +50,7 @@ function handleMealDetails() {
     store.handleCustomerCharges();
     store.handleEarnings();
     store.clearMealDetails();
-    store.render();
+    render();
   });
 }
 
@@ -65,7 +63,6 @@ function handleClear() {
 function resetCalculator() {
   $('.reset').on('click', '.resetButton', event => {
     store.resetCalc();
-    console.log(store);
     render();
   });
 }
