@@ -17,16 +17,17 @@ function updateNums(price, tax, tip) {
 function handleCustomerCharges() {
   let details = this.mealDetails;
   let item = this.charges;
-  item.subTotal = parseFloat((details.price + (details.tax * details.price)).toFixed(2));
-  item.tip = parseFloat((item.subTotal * details.tip).toFixed(2));
-  item.total = item.subTotal + item.tip;
-  this.totalTip = this.totalTip + item.tip;
+  item.subTotal = (details.price + (details.tax * details.price)).toFixed(2);
+  item.tip = (item.subTotal * details.tip).toFixed(2);
+  item.total = (parseFloat(item.subTotal) + parseFloat(item.tip)).toFixed(2);
+  this.totalTip = parseFloat(this.totalTip + item.tip).toFixed(2);
+  console.log(item.subTotal);
 }
 
 function handleEarnings() {
   console.log('earningsworking');
   let item = this.earnings;
-  item.tipTotal = this.totalTip.toFixed(2);
+  item.tipTotal = parseFloat(this.totalTip).toFixed(2);
   item.mealCount = this.counter;
   item.averageTip = parseFloat(item.tipTotal / item.mealCount).toFixed(2);
 }
