@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-
+import $ from 'jquery';
 import store from './store';
 
 function generateContent(mealDetails, charges, earnings) {
