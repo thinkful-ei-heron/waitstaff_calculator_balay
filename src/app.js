@@ -1,13 +1,7 @@
 /* eslint-disable no-console */
-'use strict';
 
-const store = {
-  mealDetails: {price: 0, tax: 0, tip: 0}, 
-  charges: {subTotal: 0, tip: 0, total: 0}, 
-  earnings: {tipTotal: 0, mealCount: 0, averageTip: 0}, 
-  counter: 0, 
-  totalTip: 0
-};
+
+import store from './store';
 
 function generateContent(mealDetails, charges, earnings) {
   $('.js-meal-details').html(`
@@ -45,41 +39,6 @@ function render() {
   generateContent(mealDetails, charges, earnings);
 }
 
-function updateNums(price, tax, tip) {
-  let item = store.mealDetails;
-  item.price = item.price + parseFloat(price);
-  item.tax = item.tax + parseFloat(tax) / 100;
-  item.tip = item.tip + parseFloat(tip) / 100;
-}
-
-function handleCustomerCharges() {
-  console.log('chargesworking');
-  let details = store.mealDetails;
-  let item = store.charges;
-  item.subTotal = parseFloat((details.price + (details.tax * details.price)).toFixed(2));
-  item.tip = parseFloat((item.subTotal * details.tip).toFixed(2));
-  item.total = item.subTotal + item.tip;
-  store.totalTip = store.totalTip + item.tip;
-  console.log(store.totalTip);
-}
-
-function handleEarnings() {
-  console.log('earningsworking');
-  let charges = store.charges;
-  let item = store.earnings;
-  item.tipTotal = store.totalTip.toFixed(2);
-  item.mealCount = store.counter;
-  item.averageTip = parseFloat(item.tipTotal / item.mealCount).toFixed(2);
-}
-
-function clearMealDetails() {
-  let meal = store.mealDetails;
-  meal.price = 0;
-  meal.tax = 0;
-  meal.tip = 0;
-  console.log(meal);
-}
-
 function handleMealDetails() {
   console.log('mealdetailsworking');
   $('.js-meal-details').on('submit', '.meal-details', event => {
@@ -88,12 +47,12 @@ function handleMealDetails() {
     let tax = $('.js-taxInput').val();
     let tip = $('.js-tipInput').val();
     $('.meal-details input[type="number"]').val('');
-    store.counter = store.counter += 1;
-    updateNums(price, tax, tip);
-    handleCustomerCharges();
-    handleEarnings();
-    clearMealDetails();
-    render();
+    store.incrementCount();
+    store.updateNums(price, tax, tip);
+    store.handleCustomerCharges();
+    store.handleEarnings();
+    store.clearMealDetails();
+    store.render();
   });
 }
 
@@ -105,25 +64,20 @@ function handleClear() {
 
 function resetCalculator() {
   $('.reset').on('click', '.resetButton', event => {
-    store.mealDetails = {price: 0, tax: 0, tip: 0};
-    store.charges = {subTotal: 0, tip: 0, total: 0};
-    store.earnings = {tipTotal: 0, mealCount: 0, averageTip: 0};
-    store.counter = 0;
-    store.totalTip = 0;
+    store.resetCalc();
     console.log(store);
     render();
   });
 }
 
 
-function calculate() {
-  render();
-  handleCustomerCharges();
-  handleEarnings();
-  clearMealDetails();
+function bindEventListeners() {
   handleMealDetails();
   handleClear();
   resetCalculator();
 }
-
-$(calculate);
+  
+export default {
+  render,
+  bindEventListeners
+};
