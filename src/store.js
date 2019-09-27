@@ -20,8 +20,7 @@ function handleCustomerCharges() {
   item.subTotal = (details.price + (details.tax * details.price)).toFixed(2);
   item.tip = (item.subTotal * details.tip).toFixed(2);
   item.total = (parseFloat(item.subTotal) + parseFloat(item.tip)).toFixed(2);
-  this.totalTip = parseFloat(this.totalTip + item.tip).toFixed(2);
-  console.log(item.subTotal);
+  this.totalTip = this.totalTip + parseFloat(item.tip);
 }
 
 function handleEarnings() {
