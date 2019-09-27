@@ -8,11 +8,11 @@ function generateContent(charges, earnings) {
   $('.js-meal-details').html(`
   <form class='meal-details'>
     <h4>Enter the Meal Details</h4>
-    <label for='price'>Base Meal Price: $</label>
+    <label for='price'>Base Meal Price:</label>
     <input type='number' class='priceInput js-priceInput' placeholder='ex. 20' step="0.01"><br><br>
-    <label for='tax' class="tax-label">Tax Rate: %</label>
+    <label for='tax' class="tax-label">Tax Rate:</label>
     <input type='number' class='taxInput js-taxInput' placeholder='ex. 3.5' step="0.01"><br><br>
-    <label for='tip'>Tip Percentage: %</label>
+    <label for='tip'>Tip Percentage:</label>
     <input type='number' class='tipInput js-tipInput' placeholder='ex. 20' step="0.01"><br><br>
     <div><button type="submit" class='submitMealDetails'>Submit</button>
     <button type='button' class='resetMealDetails'>Cancel</button></div>
@@ -28,7 +28,7 @@ function generateContent(charges, earnings) {
   <h4>My Earnings Info</h4>
   <span>Tip Total: ${earnings.tipTotal}</span> <br><br>
   <span>Meal Count: ${earnings.mealCount}</span> <br><br>
-  <span>Average Tip Per Meal: ${earnings.averageTip}</span>
+  <span>Average Tip: ${earnings.averageTip}</span>
   `);
 }
 
